@@ -1,176 +1,175 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Tag Generator</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Text Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom font for a clean look */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light background */
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid #e0e0e0;
+        }
+        .input-field, .output-field {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            transition: all 0.2s ease-in-out;
+            box-sizing: border-box;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+        }
+        .output-field {
+            background-color: #e2e8f0;
+            color: #4a5568;
+            word-wrap: break-word;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            white-space: pre-wrap;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Web Tag Generator</h1>
+<body>
+    <div class="container flex flex-col gap-6">
+        <h1 class="text-3xl font-bold text-center text-gray-800">Uniform Text Generator</h1>
 
-        <div class="space-y-4">
-            <!-- Country Input -->
-            <div>
-                <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Country (English Only):</label>
-                <input type="text" id="country" placeholder="e.g., United States"
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                       required>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+            <div class="flex flex-col gap-2">
+                <label for="firstName" class="text-gray-700 font-medium">First Name <span class="text-red-600">*</span></label>
+                <input type="text" id="firstName" class="input-field" placeholder="e.g., John">
             </div>
-
-            <!-- City Input -->
-            <div>
-                <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City:</label>
-                <input type="text" id="city" placeholder="e.g., New York"
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                       required>
+            <div class="flex flex-col gap-2">
+                <label for="lastName" class="text-gray-700 font-medium">Last Name <span class="text-red-600">*</span></label>
+                <input type="text" id="lastName" class="input-field" placeholder="e.g., Smith">
             </div>
-
-            <!-- Client Input -->
-            <div>
-                <label for="client" class="block text-sm font-medium text-gray-700 mb-1">Organization:</label>
-                <input type="text" id="client" placeholder="e.g., Augury Ltd"
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                       required>
+            <div class="flex flex-col gap-2">
+                <label for="city" class="text-gray-700 font-medium">City <span class="text-red-600">*</span></label>
+                <input type="text" id="city" class="input-field" placeholder="e.g., New York">
             </div>
-
-            <!-- Extra Text Input (Optional) -->
-            <div>
-                <label for="extraText" class="block text-sm font-medium text-gray-700 mb-1">Additional Tagging (Optional):</label>
-                <input type="text" id="extraText" placeholder="e.g., Building 1"
-                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            <div class="flex flex-col gap-2">
+                <label for="country" class="text-gray-700 font-medium">Country (Optional)</label>
+                <input type="text" id="country" class="input-field" placeholder="e.g., USA">
             </div>
-
-            <!-- Generate Button -->
-            <button id="generateBtn"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                Generate Tag
-            </button>
         </div>
 
-        <!-- Output Area -->
-        <div class="mt-6">
-            <label for="outputTag" class="block text-sm font-medium text-gray-700 mb-1">Generated Tag:</label>
-            <div class="relative">
-                <textarea id="outputTag" rows="3" readonly
-                          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-800 font-mono text-sm resize-none"
-                          placeholder="Your tag will appear here..."></textarea>
-                <button id="copyBtn"
-                        class="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs font-medium py-1 px-2 rounded-md transition duration-150 ease-in-out">
-                    Copy
-                </button>
-            </div>
-            <p id="copyMessage" class="text-green-600 text-sm mt-2 hidden">Copied successfully!</p>
+        <div class="flex flex-col gap-2">
+            <label for="outputText" class="text-gray-700 font-medium text-lg">Combined Text:</label>
+            <div id="outputText" class="output-field" aria-live="polite"></div>
+        </div>
+
+        <button id="copyButton" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+            Copy Text
+        </button>
+
+        <div id="messageBox" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md relative text-center" role="alert">
+            <span class="block sm:inline" id="messageText"></span>
         </div>
     </div>
 
     <script>
-        // Get references to DOM elements
-        const countryInput = document.getElementById('country');
-        const cityInput = document.getElementById('city');
-        const clientInput = document.getElementById('client');
-        const extraTextInput = document.getElementById('extraText');
-        const generateBtn = document.getElementById('generateBtn');
-        const outputTag = document.getElementById('outputTag');
-        const copyBtn = document.getElementById('copyBtn');
-        const copyMessage = document.getElementById('copyMessage');
+        // Get references to elements
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
+        const city = document.getElementById('city');
+        const country = document.getElementById('country');
+        const outputText = document.getElementById('outputText');
+        const copyButton = document.getElementById('copyButton');
+        const messageBox = document.getElementById('messageBox');
+        const messageText = document.getElementById('messageText');
+
+        // Array of all input fields
+        const allInputs = [firstName, lastName, city, country];
 
         /**
-         * Formats a given text string according to the rules:
-         * - Trims whitespace.
-         * - Replaces spaces with underscores if there are multiple words.
-         * @param {string} text - The input text to format.
-         * @returns {string} The formatted text.
+         * Converts input values to a single underscore-separated string.
          */
-        function formatInput(text) {
-            // Trim leading/trailing whitespace
-            text = text.trim();
-            // If the text contains spaces, replace them with underscores
-            if (text.includes(' ')) {
-                return text.replace(/\s+/g, '_'); // Replaces one or more spaces with a single underscore
-            }
-            return text; // Return as is if it's a single word or empty
+        function convertText() {
+            const parts = allInputs.map(input => input.value);
+            
+            const converted = parts
+                .map(part => part.trim()) // Trim whitespace from each part
+                .filter(part => part !== '') // Filter out empty parts
+                .map(part => part.replace(/ /g, '_')) // Replace spaces with underscores
+                .join('_'); // Join the non-empty parts with an underscore
+
+            outputText.textContent = converted;
         }
 
         /**
-         * Generates the formatted tag based on user input.
+         * Displays a temporary message.
+         * @param {string} message - The message to display.
+         * @param {string} type - 'success' or 'error'.
          */
-        function generateTag() {
-            const country = countryInput.value;
-            const city = cityInput.value;
-            const client = clientInput.value;
-            const extraText = extraTextInput.value;
+        function showMessage(message, type) {
+            messageText.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-green-100', 'border-green-400', 'text-green-700', 'bg-red-100', 'border-red-400', 'text-red-700');
 
-            // Validate required fields
-            if (!country || !city || !client) {
-                outputTag.value = "Country, City, and Organization fields are required!";
-                outputTag.classList.add('text-red-600');
-                return;
-            } else {
-                outputTag.classList.remove('text-red-600');
+            if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'border-green-400', 'text-green-700');
+            } else if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'border-red-400', 'text-red-700');
             }
+            messageBox.classList.remove('hidden');
 
-            // Start with the base word "Webbing"
-            let tagParts = ["Webbing"];
-
-            // Add formatted input values
-            tagParts.push(formatInput(country));
-            tagParts.push(formatInput(city));
-            tagParts.push(formatInput(client));
-
-            // Add optional extra text if provided
-            if (extraText.trim() !== '') {
-                tagParts.push(formatInput(extraText));
-            }
-
-            // Join all parts with a space to form the final tag
-            outputTag.value = tagParts.join(' ');
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 3000); // Hide after 3 seconds
         }
 
-        /**
-         * Copies the generated tag to the clipboard.
-         */
-        function copyToClipboard() {
-            outputTag.select(); // Select the text in the textarea
-            outputTag.setSelectionRange(0, 99999); // For mobile devices
+        // Add event listeners to all input fields for real-time conversion
+        allInputs.forEach(input => {
+            input.addEventListener('input', convertText);
+        });
 
-            // Use document.execCommand('copy') for clipboard operations in iframes
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    copyMessage.classList.remove('hidden');
-                    setTimeout(() => {
-                        copyMessage.classList.add('hidden');
-                    }, 2000); // Hide message after 2 seconds
-                } else {
-                    console.error('Failed to copy text.');
+        // Add event listener to the copy button
+        copyButton.addEventListener('click', () => {
+            const textToCopy = outputText.textContent;
+            if (textToCopy) {
+                const tempInput = document.createElement('textarea');
+                tempInput.value = textToCopy;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                try {
+                    document.execCommand('copy');
+                    showMessage('Text copied to clipboard!', 'success');
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    showMessage('Copy failed. Please try copying manually.', 'error');
+                } finally {
+                    document.body.removeChild(tempInput);
                 }
-            } catch (err) {
-                console.error('Error copying text:', err);
+            } else {
+                showMessage('No text to copy!', 'error');
             }
-        }
+        });
 
-        // Event Listeners
-        generateBtn.addEventListener('click', generateTag);
-        copyBtn.addEventListener('click', copyToClipboard);
-
-        // Optional: Generate tag on input change for real-time feedback
-        countryInput.addEventListener('input', generateTag);
-        cityInput.addEventListener('input', generateTag);
-        clientInput.addEventListener('input', generateTag);
-        extraTextInput.addEventListener('input', generateTag);
-
-        // Initial generation if fields have default values (though they are empty here)
-        generateTag();
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', convertText);
     </script>
 </body>
 </html>
+```
